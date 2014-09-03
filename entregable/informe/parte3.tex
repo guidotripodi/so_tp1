@@ -1,0 +1,43 @@
+
+\subsubsection{Introduccion}
+
+\subsubsection{Ejercicios}
+\begin{itemize}
+ 
+\item \textbf{Ejercicio 6}  Programar un tipo de tarea TaskBatch que reciba dos parametros: total cpu y
+cant bloqueos. Una tarea de este tipo debera realizar cant bloqueos llamadas bloqueantes, en
+momentos elegidos pseudoaleatoriamente. En cada tal ocasion, la tarea debera permanecer
+bloqueada durante exactamente un (1) ciclo de reloj. El tiempo de CPU total que utilice una
+tarea TaskBatch debera ser de total cpu ciclos de reloj (incluyendo el tiempo utilizado para
+lanzar las llamadas bloqueantes; no ası el tiempo en que la tarea permanezca bloqueada).
+
+\item \textbf{Ejercicio 7} Elegir al menos dos metricas diferentes, definirlas y explicar la semantica de
+su definicion. Diseñar un lote de tareas TaskBatch, todas ellas con igual uso de CPU, pero
+con diversas cantidades de bloqueos. Simular este lote utilizando el algoritmo SchedRR y una
+variedad apropiada de valores de quantum. Mantener fijo en un (1) ciclo de reloj el costo de
+cambio de contexto y dos (2) ciclos el de migracion. Deben variar la cantidad de nucleos de
+procesamiento. Para cada una de las metricas elegidas, concluir cual es el valor optimo de
+quantum a los efectos de dicha metrica.
+
+\item \textbf{Ejercicio 8} Implemente un scheduler Round-Robin que no permita la migracion de procesos
+entre nucleos (SchedRR2). La asignacion de CPU se debe realizar en el momento en que se produce la carga 
+de un proceso (load). El nucleo correspondiente a un nuevo proceso sera aquel
+con menor cantidad de procesos activos totales (RUNNING + BLOCKED + READY). Diseñe y realice un conjunto 
+de experimentos que permita evaluar comparativamente las dos implementaciones de Round-Robin.
+
+\item \textbf{Ejercicio 9} Diseñar y llevar a cabo un experimento que permita poner a prueba la ecuanimidad 
+(fairness) del algoritmo SchedLottery implementado. Tener en cuenta que, debido
+al factor pseudoaleatorio involucrado, cualquier corrida puntual podrıa ser arbitrariamente
+injusta; sin embargo, si se repite un mismo experimento n veces y se observan los resultados acumulativos, 
+tales anomalıas deberıan ir desapareciendo conforme n aumenta. En otras
+palabras, interesa mostrar en base a evidencia empırica que el algoritmo implementado efectivamente tiende 
+a ser totalmente ecuanime a medida que n tiende a infinito.
+
+\item \textbf{Ejercicio 10} Los autores del artıculo sobre lottery scheduling alegan que la optimizacion de
+compensation tickets es necesaria para compensar una posible falencia del algoritmo inicial-
+mente propuesto en ciertos escenarios. Diseñar y llevar a cabo un experimento apropiado para
+comprobar esta afirmacion (provocar un escenario donde se manifieste el problema, comparar
+simulaciones ejecutadas con y sin compensation tickets y discutir los resultados obtenidos).
+
+\end{itemize}
+\subsubsection{Resultados y Conclusiones}
