@@ -16,11 +16,29 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
+	q.push(pid); // llegó una tarea nueva
 }
 
 void SchedRR::unblock(int pid) {
 }
 
 int SchedRR::tick(int cpu, const enum Motivo m) {
-	return 0;
+//quantum == 0 termino
+	if (m == EXIT) {
+		// Si el pid actual terminó, sigue el próximo.
+		if (q.empty()) return IDLE_TASK;
+		else {
+			int sig = q.front(); q.pop();
+			return sig;
+		}
+	} else {
+		// Siempre sigue el pid actual mientras no termine.
+		if (current_pid(cpu) == IDLE_TASK && !q.empty()) {
+			int sig = q.front(); q.pop();
+			return sig;
+		} else {
+			return current_pid(cpu);
+		}
+	}
+
 }

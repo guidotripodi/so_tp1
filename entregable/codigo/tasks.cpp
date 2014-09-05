@@ -1,4 +1,5 @@
 #include "tasks.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -18,7 +19,14 @@ void TaskAlterno(int pid, vector<int> params) { // params: ms_pid, ms_io, ms_pid
 	}
 }
 
+void TaskConsola(int pid, vector<int> params) {
+	int i, ciclos;
 
+	for (i = 0; i < params[0]; i++) {
+		ciclos = rand() % (params[2] - params[1] + 1) + params[1];
+		uso_IO(pid, ciclos);
+	}
+}
 
 void tasks_init(void) {
 	/* Todos los tipos de tareas se deben registrar acá para poder ser usadas.
@@ -27,4 +35,5 @@ void tasks_init(void) {
 	register_task(TaskCPU, 1);
 	register_task(TaskIO, 2);
 	register_task(TaskAlterno, -1);
+	register_task(TaskConsola, 3);
 }

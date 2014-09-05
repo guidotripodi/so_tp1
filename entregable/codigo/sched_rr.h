@@ -15,6 +15,9 @@ class SchedRR : public SchedBase {
 
 private:
 		int next(int cpu);
+		std::queue<int> q;
+		std::vector<int> quantum;
+		std::vector<int> quantumActual;
 };
 
 #endif
