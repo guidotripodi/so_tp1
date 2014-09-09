@@ -20,6 +20,7 @@ void SchedRR::load(int pid) {
 }
 
 void SchedRR::unblock(int pid) {
+	q.pop();
 }
 
 int SchedRR::tick(int cpu, const enum Motivo m) {
@@ -32,13 +33,24 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 			return sig;
 		}
 	} else {
-		// Siempre sigue el pid actual mientras no termine.
-		if (current_pid(cpu) == IDLE_TASK && !q.empty()) {
-			int sig = q.front(); q.pop();
+		if (m == BLOCK){
+			quantumActual[current_pid(cpu)]--;
+			unblock(current_pid(cpu));
+			int sig = q.front();
 			return sig;
 		} else {
-			return current_pid(cpu);
+			if (m == TICK){
+				quantumActual[current_pid(cpu)]--;
+				return current_pid(cpu);
+			} else {
+		// Siempre sigue el pid actual mientras no termine.
+				if (current_pid(cpu) == IDLE_TASK && !q.empty()) {
+					int sig = q.front(); q.pop();
+					return sig;
+				} else {
+					return current_pid(cpu);
+				}
+			}
 		}
 	}
-
 }

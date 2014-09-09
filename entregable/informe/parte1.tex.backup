@@ -12,26 +12,5 @@ tipo interactivo (TaskConsola). Ejecutar y graficar la simulacion usando el algo
 para 1, 2 y 3 nucleos.
 \end{itemize}
 
-Grafico algoritmo FCFS con 1 nucleo.
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{ejercicio2-1nucleo.png}
- \end{center}
-  \vspace*{0.3cm}
-
-  Grafico algoritmo FCFS con 2 nucleos.
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{ejercicio2-2nucleo.png}
- \end{center}
-  \vspace*{0.3cm}
-
-  Grafico algoritmo FCFS con 3 nucleos.
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{ejercicio2-3nucleo.png}
- \end{center}
-  \vspace*{0.3cm}
-
 
 \subsubsection{Resultados y Conclusiones}
