@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <queue>
+#include <list>
 #include "basesched.h"
 
 class SchedRR : public SchedBase {
@@ -16,6 +17,7 @@ class SchedRR : public SchedBase {
 private:
 		int next(int cpu);
 		std::queue<int> q;
+		std::list<int> bloqueados;
 		std::vector<int> quantum;
 		std::vector<int> quantumActual;
 };
