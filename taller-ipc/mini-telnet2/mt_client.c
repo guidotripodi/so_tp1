@@ -6,7 +6,6 @@ int main(int argc, char* argv[]) {
 	struct sockaddr_in name;
 	char input[MAX_MSG_LENGTH];
 	char output[MAX_MSG_LENGTH];
-	int llegoalgo = 0;
 
 	/* Crear socket sobre el que se lee: dominio INET, protocolo UDP (DGRAM). */
 	sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -22,7 +21,36 @@ int main(int argc, char* argv[]) {
 	        exit(1);
 	    }
 
-		while (fgets(input, MAX_MSG_LENGTH, stdin)) {
+		for(;;) {
+	        /* Leo el comando ingresado por el usuario. */
+	        memset(input, 0, sizeof(input));
+	        fgets(input, MAX_MSG_LENGTH, stdin);
+
+	        /* Envío el comando al servidor. */
+	        if (send(sock, input, strlen(input), 0) == -1) {
+		        perror("enviando");
+		        exit(1);
+		    }
+
+
+		    memset(output, 0, sizeof(output));
+	        /* Leo el output del comando y lo imprimo en pantalla. */
+	        ssize_t n = recv(sock, output, MAX_MSG_LENGTH, 0);
+	        if (n < 0) { 
+	            perror("recibiendo");
+	            exit(1);
+	        }
+	        output[n] = 0;
+	        printf("Respuesta del servidor: \n%s", output);
+
+			if (strncmp(input, END_STRING, MAX_MSG_LENGTH) == 0) {
+				close(sock);
+				break;
+			}
+
+	    }
+
+		/*while (fgets(input, MAX_MSG_LENGTH, stdin)) {
 		    if (send(sock, input, strlen(input), 0) == -1) {
 		        perror("enviando");
 		        exit(1);
@@ -35,7 +63,7 @@ int main(int argc, char* argv[]) {
 				close(sock);
 				break;
 			}
-		}
+		}*/
 
 	}
 

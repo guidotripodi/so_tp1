@@ -34,16 +34,34 @@ int main()
 
 	/* Recibimos mensajes hasta que alguno sea el que marca el final. */
 	for (;;) {
-		read(s1, buf, MAX_MSG_LENGTH);
-		if (strncmp(buf, END_STRING, MAX_MSG_LENGTH) == 0)
-			break;
+		ssize_t n = recv(s1, buf, MAX_MSG_LENGTH, 0);
 
-		if (strlen(buf) != 0) {
-			printf("Comando: %s", buf);
-			system(buf);			
-			write(s1, stdout, MAX_MSG_LENGTH);
-		}
+        if (n < 0) { 
+            perror("Recibiendo");
+            close(s1);
+            close(sock);
+            exit(1);
+        }
 
+        buf[n] = 0;
+        if (strncmp(buf, END_STRING, MAX_MSG_LENGTH) == 0) break;
+
+        printf("Comando: %s", buf);
+
+        /* Ejecuto el comando recibido. */
+        //char output[1024];
+        //memset(output, 0, sizeof(output));
+
+		/* Reemplazo stdout y stderr por el socket de escritura. */
+        dup2(s1, STDOUT_FILENO);
+        dup2(s1, STDERR_FILENO);
+
+        /* Ejecuto el comando recibido. */
+        system(buf);
+
+        /* Fuerzo la escritura de los buffers de stdout y stderr. */
+        fflush(stdout);
+        fflush(stderr);
 	}
 	/* Cerrar socket de recepción. */
 	close(sock);
