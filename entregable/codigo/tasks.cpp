@@ -1,5 +1,6 @@
 #include "tasks.h"
 #include <stdlib.h>
+#include "time.h"
 
 using namespace std;
 
@@ -29,7 +30,31 @@ void TaskConsola(int pid, vector<int> params) {
 }
 
 void TaskBatch(int pid, vector<int> params) {
+	int total_cpu = params[0];
+	int cant_bloqueos = params[1];
+	srand(time(NULL));
 	
+	vector<bool> acciones = vector<bool>(total_cpu);
+	 // Me creo un vector que va a representar los momentos en los que se use el uso_CPU o uso_IO.
+	
+	for(int i=0;i<(int)acciones.size();i++) 
+		//segun internet poniendo .size me da el tamaño q tiene mi vector aunq en este caso podria usar total_cpu
+		acciones[i] = false;
+		
+	for(int i=0;i<cant_bloqueos;i++) {
+		int j = rand()%(acciones.size());
+		if(!acciones[j])
+			acciones[j] = true;
+		else
+			i--; // si no va a usar io, vuelvo el contador uno para atrás.
+	}
+
+	for(int i=0;i<(int)acciones.size();i++) {
+		if( acciones[i] )
+			uso_IO(pid,1); 
+		else
+			uso_CPU(pid, 1); // Uso el CPU durante 1 ciclo de reloj. (este no se si es necesario)
+	}
 }
 
 void tasks_init(void) {
@@ -42,3 +67,4 @@ void tasks_init(void) {
 	register_task(TaskConsola, 3);
 	register_task(TaskBatch, 2);
 }
+

@@ -9,9 +9,10 @@ using namespace std;
 
 SchedRR::SchedRR(vector<int> argn) {
 	// Round robin recibe la cantidad de cores y sus cpu_quantum por parámetro
-	for (int i = 0; i < argn[0]; i++) {
-		quantum[i] = argn[i + 1];
-		quantumActual[i] = argn[i + 1];
+	for (int i = 0; i < argn[0]; i++){
+		cores.push_back(-1); //todos los cores arrancan vacíos
+		quantum.push_back(argn[i+1]); //el quantum del core i es el parámetro i+1 (porque el primer param es #cores)
+		quantumActual.push_back(argn[i + 1]);
 	}
 }
 
@@ -35,27 +36,21 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 	switch (m) {
 		case EXIT:
 			quantumActual[cpu] = quantum[cpu];
-
-			// Si el pid actual terminó, sigue el próximo.
-			if (q.empty()) sig = IDLE_TASK;
-			else {
-				sig = q.front(); q.pop();
-			}
+			return next(cpu);
 			break;
 		case BLOCK:
 			quantumActual[cpu] = quantum[cpu];
 			bloqueados.push_back(current_pid(cpu));
-
-			sig = q.front();
-			q.pop();
+			return next(cpu);
 			break;
 		case TICK:
 			if (current_pid(cpu) == IDLE_TASK) {
 				if (!q.empty()) {
 					sig = q.front(); q.pop();
 					quantumActual[cpu] = quantum[cpu];
+					return sig;
 				} else {
-					sig = IDLE_TASK;
+					return IDLE_TASK;
 				}
 			} else {
 				quantumActual[cpu]--;
@@ -64,14 +59,28 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 					
 					sig = q.front(); q.pop();
 					quantumActual[cpu] = quantum[cpu];
+					return sig;
 				} else {
-					sig = current_pid(cpu);
+					return current_pid(cpu);
+
 				}
 			}
 			break;
-		default:
-			sig = current_pid(cpu);
 	}
 
-	return sig;
+	
+}
+
+int SchedRR::next(int cpu){
+	int pid ;
+	if (q.empty()){ 
+		pid= IDLE_TASK;  //no hay mas tareas -.-> idle_task
+	}else {
+		pid = q.front();	//saco la tarea de la cola
+		q.pop();
+	} 
+	
+	cores[cpu] = pid;
+	quantumActual[cpu] = quantum[cpu];	 //no hubo tick, recien se asigno al core
+	return pid;
 }

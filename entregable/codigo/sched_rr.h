@@ -18,6 +18,7 @@ private:
 		int next(int cpu);
 		std::queue<int> q;
 		std::list<int> bloqueados;
+		std::vector<int> cores;
 		std::vector<int> quantum;
 		std::vector<int> quantumActual;
 };
