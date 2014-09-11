@@ -93,5 +93,4 @@ int SchedRR2::coreMenosProcesos(){
 		}
 	}
 	return coreMinimo;
-
 }

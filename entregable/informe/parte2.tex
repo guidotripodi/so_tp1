@@ -27,3 +27,23 @@ brevemente por que la optimizacion no se considero relevante a los efectos de es
 
 
 \subsubsection{Resultados y Conclusiones}
+
+\subsubsection[]{Ejercicio 3}
+
+\indent \indent Para completar la implementación del scheduler Round-Robin y que su comportamiento sea correcto, hicimos uso de diversas estructuras de datos cuya composición y uso describimos a continuación.\\
+\begin{itemize}
+\item Una cola global FIFO nombrada $q$, que contiene los pid de las tareas activas no bloqueadas y cuyo tope representa a la próxima tarea a correr. 
+Utilizando una cola FIFO podemos obtener el comportamiento deseado, ya  que al desalojarse una tarea por consumir su quantum esta misma será agregada nuevamente a la cola, quedando al final de ésta y generando el ciclo que buscamos.
+Al ser además la única cola para todos los cores, no se restringe a una tarea a ser ejecutada por un único núcleo, permitiendo así la migración entre nucleos.\\
+\item El vector $cores$ contiene en su elemento $i$ y el pid correspondiente a la tarea que está corriendo en el core $i+1$. Inicializamos todos sus elementos en $-1$ (que se corresponde con la Idle Task) para reconocer que no se han cargado tareas en los núcleos de procesamiento.\\
+\item De la misma manera, el vector $quantum$ contiene en la posición $i$ el quantum definido para el núcleo y el vector $quantumActual$, contiene la cantidad de ticks que le quedan desde que se cargó la tarea en el core. 
+En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el quantum de una tarea, de manera tal que podamos desalojarla.\\
+\end{itemize}
+\indent Ademas, tomamos ciertas decisiones en esta implementación las cuales detallamos a continuacion:
+\begin{itemize}
+ \item Si una tarea se encuentra bloqueada cuando se produce el tick del reloj, esta misma es desalojada de la cola global, 
+ y agregada en un lista de $bloqueados$. A su vez, sera reseteado el quantum, se le dara inicio a la proxima tarea que se encuentre
+ ready y cuando el sistema operativo, nos envie una señal de unblock, la tarea desalojada regresara al final de la cola global.
+\end{itemize}
+
+%aca podriamos decir algo sobre la carga de las tareas tmb en su inicio.

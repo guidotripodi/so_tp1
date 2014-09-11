@@ -8,8 +8,10 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Introduccion}{6}
 \contentsline {subsubsection}{\numberline {2.2.2}Ejercicios}{6}
 \contentsline {subsubsection}{\numberline {2.2.3}Resultados y Conclusiones}{6}
+\contentsline {subsubsection}{\numberline {2.2.4}}{6}
 \contentsline {subsection}{\numberline {2.3}Parte 3: Evaluando los algoritmos de scheduling}{7}
 \contentsline {subsubsection}{\numberline {2.3.1}Introduccion}{7}
 \contentsline {subsubsection}{\numberline {2.3.2}Ejercicios}{7}
 \contentsline {subsubsection}{\numberline {2.3.3}Resultados y Conclusiones}{7}
-\contentsline {section}{\numberline {3}Conclusi\IeC {\'o}n}{8}
+\contentsline {subsubsection}{\numberline {2.3.4}}{7}
+\contentsline {section}{\numberline {3}Conclusi\IeC {\'o}n}{9}

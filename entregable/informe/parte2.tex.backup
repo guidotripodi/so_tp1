@@ -1,59 +1,41 @@
-Este filtro consiste en procesar una imagen para lograr un efecto miniatura. Consiste en que los objetos se vean pequeños o como de juguetes. Para esto se ''desenfoca'' la parte superior y la inferior de la im\'agen, quedando as\'i s\'olo el foco en la parte del medio, logrando tal efecto.
 
+\subsubsection{Introduccion}
 
-
-\subsubsection{Implementación en C}
-Para esta implementaci\'on procesamos la imagen por bandas.
-Para eso calculamos el límite de las bandas seg\'un los par\'ametros de entrada. Luego recorremos mediante dos ciclos la banda del medio y la dejamos igual, no hacemos ninguna transformaci\'on.\\
-Luego dentro de un ciclo que cuenta las iteraciones, hacemos el procesamiento de ''desenfoque'' de la banda superior primero y luego la inferior.\\
-Para desenfocar una banda, se recorre mediante dos ciclos que me permiten levantar cada color de cada pixel. Teniendo un componente de color de un pixel, se calcula el nuevo valor que debe tener el mismo. Para este c\'alculo se procesa la subimagen que hay alrededor del píxel, haciendo el c\'alculo por color, la multiplicamos por la matriz M, y vamos acumulando ese producto.\\
-Para evitar la saturaci\'on, al resultado lo dividimos por 6, que es la suma de las componentes de la matriz M. Con el nuevo valor obtenido, lo pasamos a la im\'agen resultante. Seguimos procesando hasta finalizar la banda.
-Para incrementar el efecto, lo que hacemos es, por iteraci\'on, guardar el p\'ixel desenfocado, para que en la siguiente iteración lo procese otra vez.\\
-
-$M = \begin{pmatrix}
-  0.01 & 0.05 & 0.18 & 0.05 & 0.01 \\
-  0.05 & 0.32 & 0.64 & 0.32 & 0.05 \\
-  0.18 & 0.64 & 1 & 0.64 & 0.18 \\
-  0.05 & 0.32 & 0.64 & 0.32 & 0.05 \\
-  0.01 & 0.05 & 0.18 & 0.05 & 0.01 \\
- \end{pmatrix}$
-
-\subsubsection{Implementación en Assembler}
-Para la implementaci\'on en assembler de este filtro, la diferencia mas sifnificativa contra la implementaci\'on en C, fue la forma de levantar los registros.
-Usando los registros \emph{XMM} se levantaron 5 registros de 16 bytes cada uno de forma que al procesar la matriz se pudo reducir la cantidad de accesos a
- memoria y as\'i mejorar la performance. Se consideraron dos opciones a la hora de diseñar este filtro:\newline
-
+\subsubsection{Ejercicios}
 \begin{itemize}
- \item Levantar de a 5 registros y avanzar bajando de a una fila y utilizando los 5 registros anteriores dejando 4 iguales y ahorrandome 4 accesos y pisando
-el primer registro con la nueva fila de abajo. La imagen muestra la idea:
-\begin{center}
- \includegraphics[scale=0.7]{imagenes/mover1.png}
-\end{center}
+ \item 
+\textbf{Ejercicio 3}  Completar la implementacion del scheduler Round-Robin implementando los
+metodos de la clase SchedRR en los archivos sched rr.cpp y sched rr.h. La implementacion
+recibe como primer parametro la cantidad de nucleos y a continuacion los valores de sus
+respectivos quantums. Debe utilizar una unica cola global, permitiendo ası la migracion de
+procesos entre nucleos.
+\item \textbf{Ejercicio 4} Diseñar uno o mas lotes de tareas para ejecutar con el algoritmo del ejercicio
+anterior. Graficar las simulaciones y comentarlas, justificando brevemente por que el comportamiento 
+observado es efectivamente el esperable de un algoritmo Round-Robin.
+\item \textbf{Ejercicio 5} A partir del artıculo
+Waldspurger, C.A. and Weihl, W.E., Lottery scheduling: Flexible proportional-share re-
+source management. Proceedings of the 1st USENIX conference on Operating Systems
+Design and Implementation – 1994.
+diseñar e implementar un scheduler basado en el esquema de loterıa. El constructor de la
+clase SchedLottery debe recibir dos parametros: el quantum y la semilla de la secuencia
+pseudoaleatoria (en ese orden). Interesa implementar al menos la idea basica del algoritmo
+y la optimizacion de tickets compensatorios (compensation tickets). Otras optimizaciones y
+refinamientos que propone el artıculo seran opcionales siempre que, en cada caso, se explique
+brevemente por que la optimizacion no se considero relevante a los efectos de este trabajo.
 
-\item El otro propuesto fue, levantar esos 5 registros pero en lugar de mover 1 registro hacia abajo, aprovechar la cache del procesador moviendonos hacia
-la derecha ya que cuando copiamos de memoria un registro de 16 bytes traemos con el mucha mas informaci\'on que queda en cache con lo cual al movernos hacia
-de esta manera estamos aprovechando los HIT de la cache en lugar de un MISS por cada iteraci\'on del ciclo. A continuaci\'on una imagen de lo propuesto.\newline
-\begin{center}
- \includegraphics[scale=0.7]{imagenes/mover2.png}
-\end{center}
-Finalmente se opto por la segunda opci\'on por cuestiones de performance. El resto de las cuestiones estructurales como ciclos y operaciones son muy
-similares al C.
 \end{itemize}
 
 
-\subsubsection{Resultados}
-Comparando ambas implementaciones, notamos que estructuralmente no cambian mucho. En ambas tenemos la misma idea de ir recorriendo las bandas por un lado e ir haciendo la cuenta para el nuevo p\'ixel por otro. De todas formas, lo que se destaca es que en ASM tenemos menos accesos a memoria, ya que procesamos de a 5 p\'ixels, mientras que en C lo hacemos de a uno.\\
-Adem\'as se puede apreciar que el ensamblado del compilador de C, al no usar SIMD se producen m\'as comparaciones que el ASM para terminar de recorrer la im\'agen.
-En cuanto a la performance confirmamos lo que hab\'iamos supuesto, el ASM result\'o ser m\'as r\'apido que el C.\\
+\subsubsection{Resultados y Conclusiones}
 
-\begin{center}
-\includegraphics[width=16cm]{imagenes/medicionMiniature.jpg}  
-\end{center}
+\subsection[]{Ejercicio 3}
 
-Como podemos ver en el gr\'afico, lo que tarda la ejecuci\'on en promedio, el C se mantiene a la misma distancia del ASM a medida que aumentan las iteraciones, siempre tardando m\'as tiempo.\\
-
-Experimentamos con varios tamaños de im\'agenes y pudimos ver que la diferencia en velocidad no cambia mucho. El C sigue tardando m\'as que el ASM, y con im\'agenes m\'as grandes hasta puede tardar m\'as que lo que vimos en el gr\'afico anterior.\\
-Consideramos que a la hora de hacer este tipo de filtros, lo m\'as prioritario para optimizar es evitar los accesos a memoria lo m\'as posible, ya que como sabemos es una de las cosas m\'as costosas en cuanto a performance.\\
-
-
-
+\indent \indent Requerido por la consigna, completamos la implementación del scheduler Round-Robin. Para simular su comportamiento de manera correcta, hicimos uso de diversas estructuras de datos cuya composición y uso describimos a continuación.\\
+\begin{itemize}
+\item Una cola global FIFO nombrada $tareas$, que contiene los pid de las tareas activas no bloqueadas y cuyo tope representa a la próxima tarea a correr. Utilizar una cola FIFO nos permite modelar el comportamiento deseado, puesto que al desalojarse una tarea por consumir su quantum será agregada nuevamente a la cola, quedando así al final de ésta y generando el accionar cíclico que buscamos. Al ser además la única cola para todos los cores, no se restringe a una tarea a ser ejecutada por un único núcleo, permitiendo así la migración entre cores.\\
+\item El vector $cores$ contiene en su elemento $i$ y el pid correspondiente a la tarea que está corriendo en el core $i+1$. Inicializamos todos sus elementos en $-1$ (que se corresponde con la Idle Task) para reconocer que no se han cargado tareas en los núcleos de procesamiento.\\
+\item De la misma manera, el vector $quantum$ contiene en la posición $i$ el quantum definido para el núcleo $i+1$ y el vector $ticks$, cuántos ticks ha pasado desde que se cargó la tarea en el core. En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el quantum de una tarea, de manera tal que podamos desalojarla.\\
+\end{itemize}
+\indent \indent Finalmente, un pequeño comentario sobre nuestra implementación.\\
+%\indent Al inicio, las tareas se asignan siguiendo el orden numérico de los núcleos. Esto es, la primer tarea en llegar será alojada en el core 0 y así sucesivamente. Asimismo, si una tarea bloqueada se desbloquea, se asigna a un core de la misma manera que si llegase por primera vez (si encuentra un core libre se la asigna a éste o caso contrario se la envía a la cola $tareas$).\\
+\indent \indent Como dato anecdótico, que además nos sirve para justificar la implementación del $load$, en nuestra primera implementación del algoritmo al momento de cargar una tarea, la asignábamos a un core siguiendo el orden numérico de los núcleos. Es decir, se la asignaba al primer núcleo que encontraba vacío (o corriendo la tarea IDLE). Si no encontraba ningún núcleo libre, se la enviaba la cola de tareas. Sin embargo, al comenzar a experimentar descubrimos que esta implementación no funcionaba correctamente: para la primera corrida de la tarea, lo hacía por un tick menos que el quantum indicado. Por lo tanto, decidimos modificar la implementación, de manera que al llegar una tarea se la envíe directamente a la cola de tareas y cuando un core busque una tarea, si corresponde su turno, la correrá. Con esto pudimos solventar dicho incoveniente.\\
