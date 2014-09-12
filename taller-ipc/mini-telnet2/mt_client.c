@@ -32,7 +32,6 @@ int main(int argc, char* argv[]) {
 		        exit(1);
 		    }
 
-
 		    memset(output, 0, sizeof(output));
 	        /* Leo el output del comando y lo imprimo en pantalla. */
 	        ssize_t n = recv(sock, output, MAX_MSG_LENGTH, 0);
@@ -44,28 +43,13 @@ int main(int argc, char* argv[]) {
 	        printf("Respuesta del servidor: \n%s", output);
 
 			if (strncmp(input, END_STRING, MAX_MSG_LENGTH) == 0) {
-				close(sock);
 				break;
 			}
-
 	    }
 
-		/*while (fgets(input, MAX_MSG_LENGTH, stdin)) {
-		    if (send(sock, input, strlen(input), 0) == -1) {
-		        perror("enviando");
-		        exit(1);
-		    }
-			
-			read(sock, output, MAX_MSG_LENGTH);
-			printf("RESPUESTA SERVIDOR %s", output);
-
-			if (strncmp(input, END_STRING, MAX_MSG_LENGTH) == 0) {
-				close(sock);
-				break;
-			}
-		}*/
-
 	}
+
+	close(sock);
 
 	return 0;
 }
