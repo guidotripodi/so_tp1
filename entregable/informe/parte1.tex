@@ -42,3 +42,19 @@ el tiempo que se tarda en ejecutar por completo todas las tareas de reduce casi 
 
 
 \subsubsection{Resultados y Conclusiones}
+
+\subsubsection[]{Ejercicio 1}
+
+\begin{verbatim}
+ void TaskConsola(int pid, vector<int> params) {
+	int i, ciclos;
+
+	for (i = 0; i < params[0]; i++) {
+		ciclos = rand() % (params[2] - params[1] + 1) + params[1];
+		uso_IO(pid, ciclos);
+	}
+} 
+\end{verbatim}
+------------------------------------------------------------------
+QUEDA EXPLICAR EL CODIGO
+------------------------------------------------------------------

@@ -20,7 +20,7 @@ int main()
 	}
 
 	/* Escuchar en el socket y permitir 5 conexiones en espera. */
-    if (listen(sock, 5) == -1) {
+    if (listen(sock, 1) < 0) {
         perror("escuchando");
         exit(1);
     }

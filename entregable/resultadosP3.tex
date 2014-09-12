@@ -42,46 +42,7 @@ simulaciones ejecutadas con y sin compensation tickets y discutir los resultados
 \end{itemize}
 \subsubsection{Resultados y Conclusiones}
 
-\subsubsection[]{Ejercicio 6}
- \begin{verbatim}
-  void TaskBatch(int pid, vector<int> params) {
-	int total_cpu = params[0];
-	int cant_bloqueos = params[1];
-	srand(time(NULL));
-	
-	vector<bool> acciones = vector<bool>(total_cpu);
-	 
-	for(int i=0;i<(int)acciones.size();i++) 
-		acciones[i] = false;
-		
-	for(int i=0;i<cant_bloqueos;i++) {
-		int j = rand()%(acciones.size());
-		if(!acciones[j])
-			acciones[j] = true;
-		else
-			i--; 
-	}
-
-	for(int i=0;i<(int)acciones.size();i++) {
-		if( acciones[i] )
-			uso_IO(pid,1); 
-		else
-			uso_CPU(pid, 1); 
-	}
-}
- \end{verbatim}
- ------------------------------------------------------------------
- QUEDA EXPLICAR EL CODIGO
-------------------------------------------------------------------
- \subsubsection[]{Ejercicio 7}
- Las métricas elegidas fueron:
-\begin{itemize}
- \item \textbf{Turnaround}: Es el intervalo de tiempo desde que un proceso es cargado hasta que este finaliza su ejecución.
- \item \textbf{Waiting Time}: Es la suma de los intervalos de tiempo que un proceso estuvo en la cola de procesos $ready$.
-\end{itemize}
- 
- 
-\subsubsection[]{Ejercicio 8}
+\subsection*{Ejercicio 8}
 \indent \indent La idea central de esta version de Round-Robin es que no permita migración entre núcleos y esto se basa en utilizar una cola FIFO por cada núcleo, donde se encolarán aquellas tareas a las que se asignó el core correspondiente. \\ 
 \indent Para implementar este algoritmo, el Round-Robin 2, utilizamos varias estructuras. Estas son:\\
 \begin{itemize}
