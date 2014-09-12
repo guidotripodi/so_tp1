@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  11 SEP 2014 20:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  12 SEP 2014 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,13 +514,96 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--41
 
  []
 
-) [6] (./parte3.tex [7]
-Underfull \hbox (badness 10000) in paragraph at lines 84--86
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--73
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+<./EJ4_RR/ejercicio4-1nucleo.png, id=37, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-1nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-1nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-1nucleo.png used on input line 87.
+
+(pdftex.def)             Requested size: 450.0pt x 95.08057pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--97
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 93--97
+
+ []
+
+<./EJ4_RR/ejercicio4-2nucleo.png, id=38, 1030.85126pt x 247.92625pt>
+File: ./EJ4_RR/ejercicio4-2nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-2nucleo.png used on input line 99.
+
+(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
+
+<./EJ4_RR/ejercicio4-3nucleo.png, id=39, 1030.85126pt x 247.92625pt>
+File: ./EJ4_RR/ejercicio4-3nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-3nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-3nucleo.png used on input line 104
+.
+(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
+ [7 <./EJ4_RR/ejercicio4-1nucleo.png (PNG copy)> <./EJ4_RR/ejercicio4-2nucleo.p
+ng (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 108--110
+
+ []
+
+<./EJ4_RR/ejercicio4-2lote1nucleo.png, id=44, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote1nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote1nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-2lote1nucleo.png used on input lin
+e 124.
+(pdftex.def)             Requested size: 450.0pt x 95.08057pt.
+
+<./EJ4_RR/ejercicio4-2lote2nucleo.png, id=45, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote2nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote2nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-2lote2nucleo.png used on input lin
+e 129.
+(pdftex.def)             Requested size: 450.0pt x 95.08057pt.
+
+<./EJ4_RR/ejercicio4-2lote3nucleo.png, id=46, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote3nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote3nucleo.png>
+Package pdftex.def Info: ./EJ4_RR/ejercicio4-2lote3nucleo.png used on input lin
+e 134.
+(pdftex.def)             Requested size: 450.0pt x 95.08057pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+[8 <./EJ4_RR/ejercicio4-3nucleo.png (PNG copy)> <./EJ4_RR/ejercicio4-2lote1nucl
+eo.png (PNG copy)> <./EJ4_RR/ejercicio4-2lote2nucleo.png (PNG copy)> <./EJ4_RR/
+ejercicio4-2lote3nucleo.png (PNG copy)>])
+Underfull \hbox (badness 10000) in paragraph at lines 149--125
+
+ []
+
+[9] (./parte3.tex [10]
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
 
  []
 
@@ -539,40 +622,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
 )
-Overfull \hbox (3.19955pt too wide) in paragraph at lines 93--130
+Overfull \hbox (3.19955pt too wide) in paragraph at lines 94--130
 [][]\OT1/cmr/m/n/10 Finalmente, cuando una tarea ter-mina, se ac-tu-al-iza la c
 an-ti-dad cor-re-spon-di-ente al n^^Sucleo rest^^Sandole
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--130
+Underfull \hbox (badness 10000) in paragraph at lines 94--130
 
  []
 
-[8] AED: lastpage setting LastPage [9] (./informe(1).aux) ) 
+[11] AED: lastpage setting LastPage
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.07225pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[12] (./informe(1).aux) ) 
 Here is how much of TeX's memory you used:
- 2359 strings out of 495028
- 32392 string characters out of 6181498
- 97920 words of memory out of 5000000
- 5531 multiletter control sequences out of 15000+600000
+ 2391 strings out of 495028
+ 33474 string characters out of 6181498
+ 99921 words of memory out of 5000000
+ 5556 multiletter control sequences out of 15000+600000
  5978 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,10n,43p,466b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pf
-b>
-Output written on informe(1).pdf (9 pages, 927517 bytes).
+ 37i,11n,43p,466b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe(1).pdf (12 pages, 990367 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
