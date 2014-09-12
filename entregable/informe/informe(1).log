@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  11 SEP 2014 15:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  11 SEP 2014 20:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,51 +514,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--41
 
  []
 
-) [6] (./parte3.tex
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
+) [6] (./parte3.tex [7]
+Underfull \hbox (badness 10000) in paragraph at lines 84--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--51
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 52--53
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
 
-[7])
-Overfull \hbox (3.19955pt too wide) in paragraph at lines 56--130
+)
+Overfull \hbox (3.19955pt too wide) in paragraph at lines 93--130
 [][]\OT1/cmr/m/n/10 Finalmente, cuando una tarea ter-mina, se ac-tu-al-iza la c
 an-ti-dad cor-re-spon-di-ente al n^^Sucleo rest^^Sandole
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 56--130
+Underfull \hbox (badness 10000) in paragraph at lines 93--130
 
  []
 
 [8] AED: lastpage setting LastPage [9] (./informe(1).aux) ) 
 Here is how much of TeX's memory you used:
- 2357 strings out of 495028
- 32371 string characters out of 6181498
+ 2359 strings out of 495028
+ 32392 string characters out of 6181498
  97920 words of memory out of 5000000
- 5530 multiletter control sequences out of 15000+600000
- 5810 words of font info for 21 fonts, out of 8000000 for 9000
+ 5531 multiletter control sequences out of 15000+600000
+ 5978 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,10n,43p,466b,268s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,10n,43p,466b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/f
@@ -567,11 +567,12 @@ ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb>
-Output written on informe(1).pdf (9 pages, 910697 bytes).
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pf
+b>
+Output written on informe(1).pdf (9 pages, 927517 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
