@@ -1,5 +1,5 @@
-TaskCPU 150
-TaskConsola 2 4 5
-TaskCPU 150
-TaskConsola 3 2 3
-TaskCPU 150
+TaskCPU 40
+TaskBatch 10  5
+TaskCPU 50
+TaskBatch 15 8
+TaskCPU 10
