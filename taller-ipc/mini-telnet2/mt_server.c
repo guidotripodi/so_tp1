@@ -46,12 +46,6 @@ int main()
         buf[n] = 0;
         if (strncmp(buf, END_STRING, MAX_MSG_LENGTH) == 0) break;
 
-        printf("Comando: %s", buf);
-
-        /* Ejecuto el comando recibido. */
-        //char output[1024];
-        //memset(output, 0, sizeof(output));
-
 		/* Reemplazo stdout y stderr por el socket de escritura. */
         dup2(s1, STDOUT_FILENO);
         dup2(s1, STDERR_FILENO);
@@ -63,10 +57,10 @@ int main()
         fflush(stdout);
         fflush(stderr);
 	}
-	/* Cerrar socket de recepción. */
+	
+	close(s1);
 	close(sock);
 
-	close(s1);
 	return 0;
 }
 

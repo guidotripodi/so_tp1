@@ -9,11 +9,8 @@ int main(int argc, char* argv[]) {
 
 	/* Crear socket sobre el que se lee: dominio INET, protocolo UDP (DGRAM). */
 	sock = socket(AF_INET, SOCK_STREAM, 0);
-	if(sock < 0){
-		perror("Error al crear el socket");
-		exit(1);
-	}
-	if (inet_aton(argv[1], (struct in_addr*) &inp) != 0) {
+
+	if (inet_aton(argv[1], &inp) != 0) {
 		name.sin_family = AF_INET;
 		name.sin_addr = inp;
 		name.sin_port = htons(PORT);
@@ -35,7 +32,6 @@ int main(int argc, char* argv[]) {
 		        exit(1);
 		    }
 
-
 		    memset(output, 0, sizeof(output));
 	        /* Leo el output del comando y lo imprimo en pantalla. */
 	        ssize_t n = recv(sock, output, MAX_MSG_LENGTH, 0);
@@ -47,17 +43,13 @@ int main(int argc, char* argv[]) {
 	        printf("Respuesta del servidor: \n%s", output);
 
 			if (strncmp(input, END_STRING, MAX_MSG_LENGTH) == 0) {
-				close(sock);
 				break;
 			}
-
 	    }
-
-	
 
 	}
 
+	close(sock);
+
 	return 0;
 }
-
-
