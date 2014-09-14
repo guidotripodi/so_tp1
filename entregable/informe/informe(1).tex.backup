@@ -113,18 +113,18 @@ mediante experimentos intentaremos comprobar ciertas propiedades que cumple el a
 \newpage
 \section{Desarrollo y Resultados}
 
-\section{Parte I – Entendiendo el simulador simusched}
+\subsection{Parte I – Entendiendo el simulador simusched}
 
 \input{parte1}
 \newpage
 %\subsection{Filtro Miniature}
 
-\section{Parte II: Extendiendo el simulador con nuevos schedulers}
+\subsection{Parte II: Extendiendo el simulador con nuevos schedulers}
 
 \input{parte2}
 \newpage
 
-\section{Parte 3: Evaluando los algoritmos de scheduling}
+\subsection{Parte 3: Evaluando los algoritmos de scheduling}
 
 \input{parte3}
 \newpage
@@ -135,13 +135,10 @@ mediante experimentos intentaremos comprobar ciertas propiedades que cumple el a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
+\section{Conclusión}
+
+\newpage
 \section{Bibliografía}
 
-\begin{itemize}
- \item Cátedra de Sistemas Operativos - Clases teóricas y prácticas (2º Cuatrimestre 2014)
- \item Facultad de Ingenieria Uruguay \\
- $(https://eva.fing.edu.uy/pluginfile.php/75120/mod\_resource/content/1/6-SO-Teo-Planificacion.pdf)$
- \item Operating Systems Concepts, Abraham Silberschatz \& Peter B. Galvin
-\end{itemize}
 
 \end{document}

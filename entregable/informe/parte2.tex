@@ -1,7 +1,5 @@
 
-\subsubsection{Introduccion}
-
-\subsubsection{Ejercicios}
+\subsection{Ejercicios}
 \begin{itemize}
  \item 
 \textbf{Ejercicio 3}  Completar la implementacion del scheduler Round-Robin implementando los
@@ -26,9 +24,9 @@ brevemente por que la optimizacion no se considero relevante a los efectos de es
 \end{itemize}
 
 
-\subsubsection{Resultados y Conclusiones}
+\subsection{Resultados y Conclusiones}
 
-\subsubsection[]{Ejercicio 3}
+\subsubsection[Resolución Ejercicio 3]{Ejercicio 3}
 
 \indent \indent Para completar la implementación del scheduler Round-Robin y que su comportamiento sea correcto, hicimos uso de diversas estructuras de datos cuya composición y uso describimos a continuación.\\
 \begin{itemize}
@@ -47,7 +45,7 @@ En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el q
 \end{itemize}
 
 
-\subsubsection[]{Ejercicio 4}
+\subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
 \indent El algoritmo de scheduling Round-Robin se basa en asignar a las tareas un tiempo determinado de procesamiento en porciones equitativas  con un orden ciclico, llamado
 $quantum$. 
@@ -65,7 +63,7 @@ seguiran corriendo las demas tareas que no esten bloqueadas respetando el orden 
 Cuando esta tarea se desbloquee puede no respetar el orden que se habia establecido. Por ej. en nuestra implementacion
 si la tarea esta bloqueada al recibir un tick, esta misma se la quita de la ejecucion y una ves desbloqueada pasara al final de
 la cola global.\\
-\\
+
 \indent Para poder verificar si el comportamiento era el deseado de nuestra implementacion del algoritmo en cuestion, 
 desarrollamos 3 disversos lotes de tareas ($taskCPU$ y $taskConsola$), los cuales fueron chequeados con 1,2 y 3 cores.\\
 Trabajando con los mismos $quantum$ cada core.
@@ -73,11 +71,11 @@ Trabajando con los mismos $quantum$ cada core.
 
 Nuestro primer lote de tareas fue el siguiente:
 \begin{verbatim}
-TaskCPU 70
-TaskConsola 2 4 5
-TaskCPU 40
-TaskConsola 3 2 3
-TaskCPU 30
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
 \end{verbatim}
 
 Utilizando este lote, obtuvimos los siguientes graficos de simulación:\\
@@ -110,11 +108,11 @@ en la simulacion trabajando con un core.\\
 
 \indent Luego, de esta simulacion probamos con un lote con tareas que se bloqueen por mas tiempo:
  \begin{verbatim}
-  TaskCPU 70
-TaskConsola 5 6 7
-TaskCPU 40
-TaskConsola 10 9 8
-TaskCPU 30
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
  \end{verbatim}
 
 \indent Manteniendo la misma cantidad de tick para cambio de contexto y core. Y manteniendo los mismos valores

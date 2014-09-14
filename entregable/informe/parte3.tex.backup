@@ -1,7 +1,5 @@
 
-\subsubsection{Introduccion}
-
-\subsubsection{Ejercicios}
+\subsection{Ejercicios}
 \begin{itemize}
  
 \item \textbf{Ejercicio 6}  Programar un tipo de tarea TaskBatch que reciba dos parametros: total cpu y
@@ -40,40 +38,39 @@ comprobar esta afirmacion (provocar un escenario donde se manifieste el problema
 simulaciones ejecutadas con y sin compensation tickets y discutir los resultados obtenidos).
 
 \end{itemize}
-\subsubsection{Resultados y Conclusiones}
+\subsection{Resultados y Conclusiones}
 
-\subsubsection[]{Ejercicio 6}
+\subsubsection[Resolución Ejercicio 6]{Ejercicio 6}
+
+\indent Al igual que con la tarea TaskConsola, mencionaremos nuestro implementación y acontinuación de la misma 
+explicaremos ciertos puntos de la misma.\\
  \begin{verbatim}
-  void TaskBatch(int pid, vector<int> params) {
-	int total_cpu = params[0];
-	int cant_bloqueos = params[1];
-	srand(time(NULL));
-	
-	vector<bool> acciones = vector<bool>(total_cpu);
-	 
-	for(int i=0;i<(int)acciones.size();i++) 
-		acciones[i] = false;
-		
-	for(int i=0;i<cant_bloqueos;i++) {
-		int j = rand()%(acciones.size());
-		if(!acciones[j])
-			acciones[j] = true;
-		else
-			i--; 
-	}
-
-	for(int i=0;i<(int)acciones.size();i++) {
-		if( acciones[i] )
-			uso_IO(pid,1); 
-		else
-			uso_CPU(pid, 1); 
-	}
-}
+                       void TaskBatch(int pid, vector<int> params) {
+                            int total_cpu = params[0];
+                            int cant_bloqueos = params[1];
+                            srand(time(NULL));
+                            vector<bool> acciones = vector<bool>(total_cpu);
+                            for(int i=0;i<(int)acciones.size();i++) 
+                               acciones[i] = false;
+	                       for(int i=0;i<cant_bloqueos;i++) {
+                                   int j = rand()%(acciones.size());
+                                   if(!acciones[j])
+                                      acciones[j] = true;
+                                   else
+                                      i--; 
+                                   }
+                            for(int i=0;i<(int)acciones.size();i++) {
+                                if( acciones[i] )
+                                    uso_IO(pid,1); 
+                                else
+                                    uso_CPU(pid, 1); 
+                               }
+                            }
  \end{verbatim}
  ------------------------------------------------------------------
  QUEDA EXPLICAR EL CODIGO
 ------------------------------------------------------------------
- \subsubsection[]{Ejercicio 7}
+ \subsubsection[Resolución Ejercicio 7]{Ejercicio 7}
  Las métricas elegidas fueron:
 \begin{itemize}
  \item \textbf{Turnaround}: Es el intervalo de tiempo desde que un proceso es cargado hasta que este finaliza su ejecución.
@@ -292,11 +289,11 @@ conjeturamos ciertos puntos:\\
  \indent Trabajando con el siguiente lote:
  
  \begin{verbatim}
-  TaskCPU 70
-TaskConsola 2 4 5
-TaskCPU 40
-TaskConsola 3 2 3
-TaskCPU 30
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
  \end{verbatim}
 
   \begin{center}
@@ -314,21 +311,21 @@ TaskCPU 30
  \indent Ahora, con un lote distinto:
  
  \begin{verbatim}
-  TaskCPU 70
-TaskConsola 5 6 7
-TaskCPU 40
-TaskConsola 10 9 8
-TaskCPU 30
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
  \end{verbatim}
  
    \begin{center}
     	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr.png}
-	{$Lote 1$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
  \end{center}
  
  \begin{center}
     	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr2.png}
-	{$Lote 1$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 5}	
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 5}	
  \end{center}
  
  \indent Nuevamente, observamos la misma igualdad entre ambos. De la unica manera en la cual se podria producir un cambio
@@ -336,12 +333,12 @@ TaskCPU 30
  
  \begin{center}
     	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr.png}
-	{$Lote 1$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
  \end{center}
  
  \begin{center}
     	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr2.png}
-	{$Lote 1$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 10}	
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 10}	
  \end{center}
  
   \indent Aqui se ve las diferencias como lo mencionamos, por ende, podemos concluir que como el Round Robin 2 solo fue modificado 
@@ -374,11 +371,11 @@ no habria ninguna modificacion en caso de aumentar o disminuir el cambio de migr
 de este nuevo scheduler.\\
 
 \begin{verbatim}
- TaskCPU 40
-TaskBatch 10  5
-TaskCPU 50
-TaskBatch 15 8
-TaskCPU 10
+                                     TaskCPU 40
+                                     TaskBatch 10  5
+                                     TaskCPU 50
+                                     TaskBatch 15 8
+                                     TaskCPU 10
 
 \end{verbatim}
 
@@ -411,11 +408,11 @@ TaskCPU 10
   \indent Para probar esta conjetura, utilizamos tareas que demanden mas al CPU como $TaskCPU$.\\
   
 \begin{verbatim}
- TaskCPU 40
-TaskCPU 15
-TaskCPU 50
-TaskCPU 30
-TaskCPU 50
+                                     TaskCPU 40
+                                     TaskCPU 15
+                                     TaskCPU 50
+                                     TaskCPU 30
+                                     TaskCPU 50
 \end{verbatim}
 
 \begin{center}
@@ -436,4 +433,6 @@ TaskCPU 50
 \indent Con estos experimentos realizados logramos observar los comportamientos que habíamos conjeturado concluyendo que son
 ciertos. 
 
+\indent Por ende, podemos concluir que el Round-Robin 2 responde de manera positiva para lotes con tareas de gran cantidad de bloqueos
+y de manera negativa al no poder paralelizar ciertos procesos.\\
   
