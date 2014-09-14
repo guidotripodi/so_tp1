@@ -53,11 +53,7 @@ int SchedLottery::tick(int cpu, const enum Motivo m) {
 			break;
 		case TICK:
 			if (current_pid(cpu) == IDLE_TASK) {
-				if (!process.empty()) {
-					return next(cpu);
-				} else {
-					return IDLE_TASK;
-				}
+				return next(cpu);
 			} else {
 				quantumActual[cpu]--;
 				if (quantumActual[cpu] == 0) {
@@ -98,10 +94,10 @@ void SchedLottery::sacar(int pid) {
 int SchedLottery::next(int cpu) {
 	int ticketGanador, procesoGanador, suma = -1, length = processTickets.size();
 	
-	ticketGanador = rand()%(tickets + 1);
-	quantumActual[cpu] = QUANTUM_TOTAL;
-
 	if (length > 0) {
+		ticketGanador = rand()%(tickets + 1);
+		quantumActual[cpu] = QUANTUM_TOTAL;
+
 		for (int i = 0; i < length; i++) {
 			suma += processTickets[i];
 
