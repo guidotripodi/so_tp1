@@ -46,11 +46,9 @@ void SchedLottery::unblock(int pid) {
 int SchedLottery::tick(int cpu, const enum Motivo m) {
 	switch (m) {
 		case EXIT:
-			sacar(current_pid(cpu));
 			return next(cpu);
 			break;
 		case BLOCK:
-			sacar(current_pid(cpu));
 			return next(cpu);
 			break;
 		case TICK:
@@ -86,11 +84,14 @@ void SchedLottery::sacar(int pid) {
 	processTickets.erase(processTickets.begin() + i);
 
 	int nuevoTotal = process.size();
-	tickets = QUANTUM_TOTAL * nuevoTotal * 1000;
-	int ticketsProceso = tickets/nuevoTotal;
 
-	for (i = 0; i < nuevoTotal; i++) {
-		processTickets[i] = ticketsProceso;
+	if (nuevoTotal > 0) {
+		tickets = QUANTUM_TOTAL * nuevoTotal * 1000;
+		int ticketsProceso = tickets/nuevoTotal;
+
+		for (i = 0; i < nuevoTotal; i++) {
+			processTickets[i] = ticketsProceso;
+		}
 	}
 }
 
@@ -100,16 +101,20 @@ int SchedLottery::next(int cpu) {
 	ticketGanador = rand()%(tickets + 1);
 	quantumActual[cpu] = QUANTUM_TOTAL;
 
-	for (int i = 0; i < length; i++) {
-		suma += processTickets[i];
+	if (length > 0) {
+		for (int i = 0; i < length; i++) {
+			suma += processTickets[i];
 
-		if (suma <= ticketGanador) {
-			procesoGanador = process[i];
-			break;
+			if (suma >= ticketGanador) {
+				procesoGanador = process[i];
+				break;
+			}
 		}
+		// lo saco de la lista de procesos disponibles
+		sacar(procesoGanador);
+		return procesoGanador;
+	} else  {
+		return IDLE_TASK;
 	}
-	
-	// lo saco de la lista de procesos disponibles
-	sacar(procesoGanador);
-	return procesoGanador;
+
 }
