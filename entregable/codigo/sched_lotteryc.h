@@ -4,7 +4,7 @@
 #include "basesched.h"
 
 
-class SchedLottery : public SchedBase {
+class SchedLotteryC : public SchedBase {
   public:
     SchedLottery(std::vector<int> argn);
     ~SchedLottery();
@@ -17,11 +17,8 @@ private:
 	std::vector<int> quantumActual;
 	std::vector<int> process;
 	std::vector<int> processTickets;
-	std::vector<int> bloqueados;
-	std::vector<int> bloqueadosQuantumConsumido;
 	int semilla;
 	int tickets;
-	int ticketsConCompensacion;
 	void sacar(int pid);
 	int next(int cpu);
 };
