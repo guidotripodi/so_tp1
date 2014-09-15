@@ -1,7 +1,5 @@
 
-\subsubsection{Introduccion}
-
-\subsubsection{Ejercicios}
+\subsection{Ejercicios}
 \begin{itemize}
  \item 
 \textbf{Ejercicio 3}  Completar la implementacion del scheduler Round-Robin implementando los
@@ -26,9 +24,9 @@ brevemente por que la optimizacion no se considero relevante a los efectos de es
 \end{itemize}
 
 
-\subsubsection{Resultados y Conclusiones}
+\subsection{Resultados y Conclusiones}
 
-\subsubsection[]{Ejercicio 3}
+\subsubsection[Resolución Ejercicio 3]{Ejercicio 3}
 
 \indent \indent Para completar la implementación del scheduler Round-Robin y que su comportamiento sea correcto, hicimos uso de diversas estructuras de datos cuya composición y uso describimos a continuación.\\
 \begin{itemize}
@@ -47,7 +45,7 @@ En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el q
 \end{itemize}
 
 
-\subsubsection[]{Ejercicio 4}
+\subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
 \indent El algoritmo de scheduling Round-Robin se basa en asignar a las tareas un tiempo determinado de procesamiento en porciones equitativas  con un orden ciclico, llamado
 $quantum$. 
@@ -65,7 +63,7 @@ seguiran corriendo las demas tareas que no esten bloqueadas respetando el orden 
 Cuando esta tarea se desbloquee puede no respetar el orden que se habia establecido. Por ej. en nuestra implementacion
 si la tarea esta bloqueada al recibir un tick, esta misma se la quita de la ejecucion y una ves desbloqueada pasara al final de
 la cola global.\\
-\\
+
 \indent Para poder verificar si el comportamiento era el deseado de nuestra implementacion del algoritmo en cuestion, 
 desarrollamos 3 disversos lotes de tareas ($taskCPU$ y $taskConsola$), los cuales fueron chequeados con 1,2 y 3 cores.\\
 Trabajando con los mismos $quantum$ cada core.
@@ -73,11 +71,11 @@ Trabajando con los mismos $quantum$ cada core.
 
 Nuestro primer lote de tareas fue el siguiente:
 \begin{verbatim}
-TaskCPU 70
-TaskConsola 2 4 5
-TaskCPU 40
-TaskConsola 3 2 3
-TaskCPU 30
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
 \end{verbatim}
 
 Utilizando este lote, obtuvimos los siguientes graficos de simulación:\\
@@ -105,16 +103,49 @@ en la simulacion trabajando con un core.\\
 	  {$Lote 1$ - Scheduler RR - 3 core}	
 \end{center}
 
+\indent Se ha podido notar, ademas del la ejecucion circular de las tareas, un cierto paralelismo al estar trabajando con
+2 o 3 cores.\\
 
+\indent Luego, de esta simulacion probamos con un lote con tareas que se bloqueen por mas tiempo:
+ \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
+ \end{verbatim}
 
+\indent Manteniendo la misma cantidad de tick para cambio de contexto y core. Y manteniendo los mismos valores
+de $quantum$ obtuvimos los siguientes graficos:
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote1nucleo.png}
+	{$Lote 2$ - Scheduler RR - 1 core}	
+ \end{center}
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote2nucleo.png}
+	{$Lote 2$ - Scheduler RR - 2 core}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote3nucleo.png}
+	{$Lote 2$ - Scheduler RR - 3 core}	
+ \end{center}
+
+ \indent Con este lote, ademas de lo observador anteriormente pudimos ver que, al tener una tarea bloqueada
+ por un largo tiempo, el scheduler directamente la ignora.\\
+ 
 \indent Luego de los gráficos pudimos observar lo siguiente sobre el comportamiento  del Round-Robin:\\
 \begin{itemize}
 \item 1 - Carácter circular del algoritmo.
-\item 2 - Desalojo de las tareas cuando se bloquean o terminan y la inmediata asignación del núcleo a la siguiente tarea (de existir ésta).
+\item 2 - Desalojo de las tareas cuando se bloquean o terminan y la inmediata asignación del núcleo a la siguiente tarea en caso de existir alguna.
 \item 3 - Una tarea bloqueada es ignorada por el scheduler hasta que se desbloquee.
 \item 4 - Libre de inanición.
 \end{itemize}
 
-
 \indent Finalmente, dado su carácter circular y equitativo, podemos afirmar que todas las tareas que 
 estén en condiciones de correr serán ejecutadas y ninguna será negada de tiempo de procesamiento.\\
+
+\subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
+
