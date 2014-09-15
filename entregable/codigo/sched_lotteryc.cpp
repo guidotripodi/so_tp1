@@ -5,7 +5,7 @@ using namespace std;
 
 const int QUANTUM_TOTAL = 10;
 
-SchedLottery::SchedLottery(vector<int> argn) {
+SchedLotteryC::SchedLotteryC(vector<int> argn) {
   // FCFS recibe la cantidad de cores.
 
 	for (int i = 0; i < argn[0]; i++){
@@ -15,14 +15,14 @@ SchedLottery::SchedLottery(vector<int> argn) {
 	srand(argn[1]);
 }
 
-SchedLottery::~SchedLottery() {
+SchedLotteryC::~SchedLotteryC() {
 }
 
-void SchedLottery::load(int pid) {
+void SchedLotteryC::load(int pid) {
   load(pid, 0);
 }
 
-void SchedLottery::load(int pid, int deadline) {
+void SchedLotteryC::load(int pid, int deadline) {
 	// Lo agrego a la lista de procesos
 	process.push_back(pid);
 	int nuevoTotal = process.size();
@@ -37,38 +37,18 @@ void SchedLottery::load(int pid, int deadline) {
 	}
 }
 
-void SchedLottery::unblock(int pid) {
-	// SIN COMPENSATION
+void SchedLotteryC::unblock(int pid) {
 	// Por ahora lo vuelvo a cargar de nuevo como un proceso nuevo
 	// Se le asignara la cantidad de tickets proporcional
-	//load(pid);
-
-
-	// CON COMPENSATION
-	// a los procesos que se bloquean, los agregamos mas de una vez
-	// (la cantidad de ticks antes de que se complete el quantum)
-	// asi se implementa la optimizacion de compensation
-	int i, j, length = bloqueados.size();
-	for (i = 0; i < length; i++) {
-		if (bloqueados[i] == pid) {
-			for (j = 0; j < bloqueadosQuantumConsumido[i]; j++) {
-				load(pid);
-			}
-			// lo borramos de la lista de bloqueados
-			bloqueados.erase(bloqueados.begin() + i);
-			bloqueadosQuantumConsumido.erase(bloqueadosQuantumConsumido.begin() + i);
-		}
-	}	
+	load(pid);
 }
 
-int SchedLottery::tick(int cpu, const enum Motivo m) {
+int SchedLotteryC::tick(int cpu, const enum Motivo m) {
 	switch (m) {
 		case EXIT:
 			return next(cpu);
 			break;
 		case BLOCK:
-			bloqueados.push_back(current_pid(cpu));
-			bloqueadosQuantumConsumido.push_back(quantumActual[cpu]);
 			return next(cpu);
 			break;
 		case TICK:
@@ -87,15 +67,17 @@ int SchedLottery::tick(int cpu, const enum Motivo m) {
 	}
 }
 
-void SchedLottery::sacar(int pid) {
+void SchedLotteryC::sacar(int pid) {
 	int length = process.size(), i;
 
 	for (i = 0; i < length; i++) {
 		if (process[i] == pid) {
-			process.erase(process.begin() + i);
-			processTickets.erase(processTickets.begin() + i);
+			break;
 		}
 	}
+
+	process.erase(process.begin() + i);
+	processTickets.erase(processTickets.begin() + i);
 
 	int nuevoTotal = process.size();
 
@@ -109,7 +91,7 @@ void SchedLottery::sacar(int pid) {
 	}
 }
 
-int SchedLottery::next(int cpu) {
+int SchedLotteryC::next(int cpu) {
 	int ticketGanador, procesoGanador, suma = -1, length = processTickets.size();
 	
 	if (length > 0) {
