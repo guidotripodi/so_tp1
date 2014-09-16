@@ -157,7 +157,7 @@ estén en condiciones de correr serán ejecutadas y ninguna será negada de tiem
 tenga una probabilidad p de ejecutarse. \\
 Esta probabilidad de ganar un recurso, está representada por billetes de lotería (o tickets). A la hora de asignar un recurso
 (procesador) a un proceso se celebra una lotería, en la que un recurso es asignado al proceso con el ticket ganador.\\
-Esto permite asignar los recursos eficaz y proporcionalmente.
+Esto permite asignar los recursos eficaz y proporcionalmente.\\
 
 \begin{center}
 \textbf{Implementación de la idea básica del algoritmo} 
@@ -195,8 +195,8 @@ La idea de esta opimización es sencilla. Se trata de darle más probabilidad de
 Cuando un proceso se bloquea, no terminó todo el quantum que había ganado.\\
 Sabiendo esto, guardamos el pid del proceso a bloquearse en una lista de bloqueados, y también guardamos en otra lista 
 el quantum que consumió.\\
-Al desbloquearse, en vez de agregarlo una vez a la lista de procesos, lo agregamos la cantidad de veces como ticks 
-consumió antes de bloquearse. \\
+Al desbloquearse, en vez de agregarlo una vez a la lista de procesos disponibles, lo agregamos la cantidad de veces como ticks 
+le faltaba para terminar el quantum antes de bloquearse. \\
 Por ejemplo, si el quantum es de 10 y consumió solo 4, lo agregamos 4 veces a la lista de procesos. 
 Y aca está el punto clave de la optimización: el proceso bloqueado en realidad tiene más tickets que un proceso 
 que no se bloqueó, en el ejemplo, 4 veces más. Por lo tanto tiene más posibilidades de volver a ser elegido.\\
