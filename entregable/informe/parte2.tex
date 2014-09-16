@@ -40,14 +40,14 @@ En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el q
 \indent Ademas, tomamos ciertas decisiones en esta implementación las cuales detallamos a continuacion:
 \begin{itemize}
  \item Si una tarea se encuentra bloqueada cuando se produce el tick del reloj, esta misma es desalojada de la cola global, 
- y agregada en un lista de $bloqueados$. A su vez, sera reseteado el quantum, se le dara inicio a la proxima tarea que se encuentre
+ y agregada en un lista de $bloqueados$. A su vez, será reseteado el quantum, se le dara inicio a la proxima tarea que se encuentre
  ready y cuando el sistema operativo, nos envie una señal de unblock, la tarea desalojada regresara al final de la cola global.
 \end{itemize}
 
 
 \subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
-\indent El algoritmo de scheduling Round-Robin se basa en asignar a las tareas un tiempo determinado de procesamiento en porciones equitativas  con un orden ciclico, llamado
+\indent El algoritmo de scheduling Round-Robin se basa en asignar a las tareas un tiempo determinado de procesamiento en porciones equitativas  con un orden cíclico, llamado
 $quantum$. 
 Esto se hace definiendo para cada núcleo de procesamiento un valor de $quantum$ y cada tarea que corre en ese núcleo lo hará a lo sumo por un tiempo igual a éste. 
 Si la tarea consume su quantum pero no terminó su ejecución, se la envia a la cola global y se asigna el procesador a la siguiente tarea, en 
@@ -64,8 +64,8 @@ Cuando esta tarea se desbloquee puede no respetar el orden que se habia establec
 si la tarea esta bloqueada al recibir un tick, esta misma se la quita de la ejecucion y una ves desbloqueada pasara al final de
 la cola global.\\
 
-\indent Para poder verificar si el comportamiento era el deseado de nuestra implementacion del algoritmo en cuestion, 
-desarrollamos 3 disversos lotes de tareas ($taskCPU$ y $taskConsola$), los cuales fueron chequeados con 1,2 y 3 cores.\\
+\indent Para poder verificar si el comportamiento era el deseado de nuestra implementación del algoritmo en cuestión, 
+desarrollamos 3 diversos lotes de tareas ($taskCPU$ y $taskConsola$), los cuales fueron chequeados con 1,2 y 3 cores.\\
 Trabajando con los mismos $quantum$ cada core.
 \indent
 
@@ -78,7 +78,7 @@ Nuestro primer lote de tareas fue el siguiente:
                                      TaskCPU 30
 \end{verbatim}
 
-Utilizando este lote, obtuvimos los siguientes graficos de simulación:\\
+Utilizando este lote, obtuvimos los siguientes gráficos de simulación:\\
 \begin{center}
 
     
@@ -88,10 +88,10 @@ Utilizando este lote, obtuvimos los siguientes graficos de simulación:\\
 \end{center}
 
 
-\indent Con esta simulacion, trabajamos con 2 ticks de cambio de contexto y 5 de cambio de procesador, el cual no presta importancia
-en la simulacion trabajando con un core.\\
+\indent Con esta simulación, trabajamos con 2 ticks de cambio de contexto y 5 de cambio de procesador, el cual no presta importancia
+en la simulación trabajando con un core.\\
 \\
-\indent Se puede observar el cambio de tareas ciclico tanto porque terminaron su quantum o porque se bloquearon.\\
+\indent Se puede observar el cambio de tareas cíclico tanto porque terminaron su quantum o porque se bloquearon.\\
 
 \begin{center}
   	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2nucleo.png}
@@ -106,7 +106,7 @@ en la simulacion trabajando con un core.\\
 \indent Se ha podido notar, ademas del la ejecucion circular de las tareas, un cierto paralelismo al estar trabajando con
 2 o 3 cores.\\
 
-\indent Luego, de esta simulacion probamos con un lote con tareas que se bloqueen por mas tiempo:
+\indent Luego, de esta simulación probamos con un lote con tareas que se bloqueen por más tiempo:
  \begin{verbatim}
                                      TaskCPU 70
                                      TaskConsola 5 6 7
@@ -116,7 +116,7 @@ en la simulacion trabajando con un core.\\
  \end{verbatim}
 
 \indent Manteniendo la misma cantidad de tick para cambio de contexto y core. Y manteniendo los mismos valores
-de $quantum$ obtuvimos los siguientes graficos:
+de $quantum$ obtuvimos los siguientes gráficos:
 
 \begin{center}
     	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote1nucleo.png}
@@ -133,10 +133,10 @@ de $quantum$ obtuvimos los siguientes graficos:
 	{$Lote 2$ - Scheduler RR - 3 core}	
  \end{center}
 
- \indent Con este lote, ademas de lo observador anteriormente pudimos ver que, al tener una tarea bloqueada
+ \indent Con este lote, además de lo observado anteriormente pudimos ver que, al tener una tarea bloqueada
  por un largo tiempo, el scheduler directamente la ignora.\\
  
-\indent Luego de los gráficos pudimos observar lo siguiente sobre el comportamiento  del Round-Robin:\\
+\indent Luego de los gráficos pudimos observar lo siguiente sobre el comportamiento del Round-Robin:\\
 \begin{itemize}
 \item  Carácter circular del algoritmo.
 \item  Desalojo de las tareas cuando se bloquean o terminan y la inmediata asignación del núcleo a la siguiente tarea en caso de existir alguna.
@@ -150,12 +150,21 @@ estén en condiciones de correr serán ejecutadas y ninguna será negada de tiem
 \subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
 
 \begin{center}
+\textbf{Lottery Scheduling} 
+\end{center}
+
+\indent Lottery Scheduling se trata de un mecanismo que asigna recursos de manera aleatoria. Dando lugar a que cada proceso
+tenga una probabilidad p de ejecutarse. \\
+Esta probabilidad de ganar un recurso, está representada por billetes de lotería (o tickets). A la hora de asignar un recurso
+(procesador) a un proceso se celebra una lotería, en la que un recurso es asignado al proceso con el ticket ganador.\\
+Esto permite asignar los recursos eficaz y proporcionalmente.
+
+\begin{center}
 \textbf{Implementación de la idea básica del algoritmo} 
 \end{center}
 
-
 \indent Para llevar a cabo este concepto, se implementó la idea de asignación de tickets por proceso. 
-Es decir, que a cada proceso nuevo que llegue,el scheduler le asigna una cantidad determinada de tickets. \\
+Es decir, que a cada proceso nuevo que llegue, el scheduler le asigna una cantidad determinada de tickets. \\
 Esta cantidad de tickets en principio es igual para todos los procesos.\\
 Por eso a la hora de cargarse un nuevo proceso, se recalcula la cantidad total de tickets.\\
 
@@ -169,8 +178,8 @@ Por eso a la hora de cargarse un nuevo proceso, se recalcula la cantidad total d
 Se elige un ticket ganador mediante la función rand entre 0 y la cantidad total de tickets menos uno. Para esto, previamente ya habíamos configurado (al construirse el scheduler) la semilla del
 generador de numeros aleatorios pasada por parámetro con la función srand.\\
 Una vez conseguido el ticket ganador, hay un proceso ganador del quantum, y debemos buscarlo en la lista de procesos. \\
-El quantum es un número arbitrario elegido por nosotros para que el proceso pueda correr más de un tick de reloj. 
-En este caso, el quantum es de 10, para que el proceso ganador pueda correr 10 ticks de reloj, si antes no se bloquea. \\
+El quantum es un parámetro que usamos para que el proceso pueda correr más de un tick de reloj. 
+El proceso ganador puede no llegar a terminar su quantum, ya que se bloqueó. \\
 En caso de bloquearse el proceso, se lo saca de la lista de procesos disponibles, 
 para que el scheduler no lo tenga en cuenta hasta que el mismo se desbloquee. \\
 Al desbloquearse, el scheduler simplemente lo agrega de nuevo a la lista de procesos disponibles con la misma cantidad de
@@ -190,4 +199,4 @@ Al desbloquearse, en vez de agregarlo una vez a la lista de procesos, lo agregam
 consumió antes de bloquearse. \\
 Por ejemplo, si el quantum es de 10 y consumió solo 4, lo agregamos 4 veces a la lista de procesos. 
 Y aca está el punto clave de la optimización: el proceso bloqueado en realidad tiene más tickets que un proceso 
-que no se bloqueó, en el ejemplo, 4 veces más.\\
+que no se bloqueó, en el ejemplo, 4 veces más. Por lo tanto tiene más posibilidades de volver a ser elegido.\\

@@ -83,10 +83,10 @@ para obtener datos relevantes tomamos un promedio de las mediciones.\\
 varios quantum para poder obtener una aproximación del efecto del $quantum$ en la ejecución del lote de tareas. 
 
 \indent De esta aproximación, se confeccionaron gráficos de turnaround time en función del quantum, 
-referente al estudio con 2 y 3 núcleos, los cuales se proveeran a continuación:\\
+referente al estudio con 2 y 3 núcleos, los cuales se proveerán a continuación:\\
 
 \indent Luego de realizar mediciones con distintos $quantum$, tomamos la decisión de trabajar con los mismos $quantum$ para cada nucleo
-al trabajar con mas de 1 core. (Se muestra acontinuación un grafico para demostrar que no era una decision acertada trabajar
+al trabajar con más de 1 core. (Se muestra acontinuación un gráfico para demostrar que no era una decisión acertada trabajar
 con disversos $quantum$ para cada core).
 
 \begin{center}
@@ -95,7 +95,7 @@ con disversos $quantum$ para cada core).
 	{$Eje X = Quantum; $\\$ Eje Y = Tiempo$}\\
  \end{center}
 
-\indent Al realizar, este grafico y varias mediciones con distintos $quantum$ por core, nos dimos cuenta que no terminaban
+\indent Al realizar, este gráfico y varias mediciones con distintos $quantum$ por core, nos dimos cuenta que no terminaban
 siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distintos tiempos por la migracion de procesos por core.\\
 \indent Por ende, optamos por realizar mediciones con igualdad de $quantum$ por core para obtener la mejor performance posible.\\
  
@@ -112,7 +112,7 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
  \begin{center}
  \textbf{2 Core}
  \end{center}
-  A continuación se muestran los Diagramas de Gantt mas relevantes:
+  A continuación se muestran los Diagramas de Gantt más relevantes:
   
   \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour2core1quan.png}
@@ -133,7 +133,7 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
  \end{center}
 
   
-   \indent La performance sigue mejorando,a partir de este valor, el desempeño comienza a estabilizarse,  como muestran los siguiente dos gráficos. 
+   \indent La performance sigue mejorando,a partir de este valor, el desempeño comienza a estabilizarse, como muestran los siguiente dos gráficos. 
    Las pequeñas diferencias en los valores responden a la pseudoaleatoridad de las tareas TaskBatch.\\
   
    \begin{center}
@@ -240,7 +240,7 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 agregamos un núcleo aumentamos la posibilidad de una migración de la tareas.\\
 \indent \indent En todos lo casos se observa la influencia negativa que proviene de elegir un quantum con valores pequeños.\\
 \indent \indent Agregar núcleos de procesamiento mejora significativamente la performance de acuerdo a la métricas con las que
-trabajamos,al permitir más procesamiento en pararelo y disminuyendo los waiting time de las tareas.\\
+trabajamos, al permitir más procesamiento en pararelo y disminuyendo los waiting time de las tareas.\\
 \indent \indent  Fijada una cantidad de núcleos, aumentar el valor del quantum también mejora la performance, 
 especialmente los tiempos referidos a las tareas que menos cantidad de bloqueos tienen. 
 Igualmente, a partir de cierto valor de quantum, las mejoras en la performance dejan de ser muy significativas. 
