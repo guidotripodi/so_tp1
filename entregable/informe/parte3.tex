@@ -49,27 +49,30 @@ explicaremos ciertos puntos de la misma.\\
                             int total_cpu = params[0];
                             int cant_bloqueos = params[1];
                             srand(time(NULL));
-                            vector<bool> acciones = vector<bool>(total_cpu);
-                            for(int i=0;i<(int)acciones.size();i++) 
-                               acciones[i] = false;
+                            vector<bool> uso = vector<bool>(total_cpu);
+                            for(int i=0;i<(int)uso.size();i++) 
+                               uso[i] = false;
 	                       for(int i=0;i<cant_bloqueos;i++) {
-                                   int j = rand()%(acciones.size());
-                                   if(!acciones[j])
-                                      acciones[j] = true;
+                                   int j = rand()%(uso.size());
+                                   if(!uso[j])
+                                      uso[j] = true;
                                    else
                                       i--; 
                                    }
-                            for(int i=0;i<(int)acciones.size();i++) {
-                                if( acciones[i] )
+                            for(int i=0;i<(int)uso.size();i++) {
+                                if( uso[i] )
                                     uso_IO(pid,1); 
                                 else
                                     uso_CPU(pid, 1); 
                                }
                             }
  \end{verbatim}
- ------------------------------------------------------------------
- QUEDA EXPLICAR EL CODIGO
-------------------------------------------------------------------
+
+ \indent Para este tipo de tarea, creamos un vector de tamaño igual a $total_cpu$ el cual tendra bool, ya sea true o false
+ dependiendo del uso que se le de dentro de la tarea, ya sea uso\_IO o uso\_CPU. En caso de ser uso\_IO sera true, y sino false.\\
+ Luego, utilizaremos un ciclo que ira desde 0 hasta el tamaño del vector y dependiendo el valor booleano, usará la funciones
+ dadas por la catedra uso\_IO o uso\_CPU.\\
+ 
  \subsubsection[Resolución Ejercicio 7]{Ejercicio 7}
  Las métricas elegidas fueron:
 \begin{itemize}
@@ -436,3 +439,63 @@ ciertos.
 \indent Por ende, podemos concluir que el Round-Robin 2 responde de manera positiva para lotes con tareas de gran cantidad de bloqueos
 y de manera negativa al no poder paralelizar ciertos procesos.\\
   
+\subsubsection[Resolución Ejercicio 9]{Ejercicio 9}
+
+\subsubsection[Resolución Ejercicio 10]{Ejercicio 10}
+
+\indent Hemos encontrado, luego de varios experimentos, que este tipo de scheduler presenta graves problemas cuando 
+se tienen varias tareas con mismo deadline.\\
+Al no presentar ningun tipo de especificación, este scheduler, al no saber cuanto durará la tarea ejecuta cualquiera sin
+darle prioridad al orden de los deadline dado en el lote de tarea.\\
+A continuación, expondremos un caso practico donde se puede ver como impacta dentro del desempeño del scheduler el orden en el que son
+cargadas las tareas pero la falta de informacion del scheduler imposibilita la posibilidad de cumplir la propiedad
+de carga respetando los deadline dados.\\
+
+Uno de los lotes propuestos, fue el siguiente:\\
+\\\\\\\\
+\begin{verbatim}
+                                         $5:
+                                         TaskCPU 40
+                                         $25:
+                                         TaskConsola 2 5 8
+                                         $25:
+                                         TaskCPU 100
+                                         $25:
+                                         TaskConsola 1 1 5
+
+\end{verbatim}
+
+Donde el resultado que obtuvimos fue el siguiente:\\
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./ej10p7con.png}
+	{$Lote 2$ - Lottery - 2 core}	
+ \end{center}
+
+\indent Como se puede observar, tanto el proceso 2 como 3 y 4 presentan el mismo deadline y terminan corriendo
+fuera del orden acordado a pesar de estar trabajando con varios cores a la ves.\\
+
+\indent Tambien, desarrollamos experimentos para los casos en que los deadline no sean los mismos, y obtuvimos
+resultados similares.\\
+Uno de los lotes fue el siguiente:
+
+\begin{verbatim}
+                                         $5:
+                                         TaskCPU 40
+                                         $25:
+                                         TaskConsola 2 5 8
+                                         $30:
+                                         TaskCPU 100
+                                         $35:
+                                         TaskConsola 1 1 5
+
+\end{verbatim}
+
+Donde el resultado fue:\\
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./ej10p12con.png}
+	{$Lote 4$ - Lottery - 2 core}	
+ \end{center}
+
+ \indent Como vemos, a pesar de tener distintos valores de deadline no se respeta el orden en este scheduler.\\
