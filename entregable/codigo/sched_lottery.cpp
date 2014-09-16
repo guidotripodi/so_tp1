@@ -48,7 +48,6 @@ void SchedLottery::unblock(int pid) {
 	// (la cantidad de ticks antes de que se complete el quantum)
 	// asi se implementa la optimizacion de compensation
 	int i, j, length = bloqueados.size();
-
 	for (i = 0; i < length; i++) {
 		if (bloqueados[i] == pid) {
 			for (j = 0; j < bloqueadosQuantumConsumido[i]; j++) {
@@ -69,7 +68,7 @@ int SchedLottery::tick(int cpu, const enum Motivo m) {
 		case BLOCK:
 			quantumActual[cpu]--;
 			bloqueados.push_back(current_pid(cpu));
-			bloqueadosQuantumConsumido.push_back(quantumTotal - quantumActual[cpu]);
+			bloqueadosQuantumConsumido.push_back(quantumActual[cpu]);
 			return next(cpu);
 			break;
 		case TICK:
