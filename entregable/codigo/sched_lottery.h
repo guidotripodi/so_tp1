@@ -19,6 +19,7 @@ private:
 	std::vector<int> processTickets;
 	std::vector<int> bloqueados;
 	std::vector<int> bloqueadosQuantumConsumido;
+	int quantumTotal;
 	int semilla;
 	int tickets;
 	int ticketsConCompensacion;

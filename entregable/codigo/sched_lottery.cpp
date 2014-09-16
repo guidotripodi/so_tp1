@@ -1,18 +1,17 @@
 #include "sched_lottery.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
-const int QUANTUM_TOTAL = 10;
-
 SchedLottery::SchedLottery(vector<int> argn) {
-  // FCFS recibe la cantidad de cores.
+	quantumTotal = argn[1];
 
 	for (int i = 0; i < argn[0]; i++){
-		quantumActual.push_back(QUANTUM_TOTAL);
+		quantumActual.push_back(quantumTotal);
 	}
 
-	srand(argn[1]);
+	srand(argn[2]);
 }
 
 SchedLottery::~SchedLottery() {
@@ -27,7 +26,7 @@ void SchedLottery::load(int pid, int deadline) {
 	process.push_back(pid);
 	int nuevoTotal = process.size();
 
-	tickets = QUANTUM_TOTAL * nuevoTotal * 1000;
+	tickets = quantumTotal * nuevoTotal * 1000;
 	int ticketsProceso = tickets/nuevoTotal;
 
 	processTickets.push_back(ticketsProceso);
@@ -49,6 +48,7 @@ void SchedLottery::unblock(int pid) {
 	// (la cantidad de ticks antes de que se complete el quantum)
 	// asi se implementa la optimizacion de compensation
 	int i, j, length = bloqueados.size();
+
 	for (i = 0; i < length; i++) {
 		if (bloqueados[i] == pid) {
 			for (j = 0; j < bloqueadosQuantumConsumido[i]; j++) {
@@ -58,7 +58,7 @@ void SchedLottery::unblock(int pid) {
 			bloqueados.erase(bloqueados.begin() + i);
 			bloqueadosQuantumConsumido.erase(bloqueadosQuantumConsumido.begin() + i);
 		}
-	}	
+	}
 }
 
 int SchedLottery::tick(int cpu, const enum Motivo m) {
@@ -67,8 +67,9 @@ int SchedLottery::tick(int cpu, const enum Motivo m) {
 			return next(cpu);
 			break;
 		case BLOCK:
+			quantumActual[cpu]--;
 			bloqueados.push_back(current_pid(cpu));
-			bloqueadosQuantumConsumido.push_back(quantumActual[cpu]);
+			bloqueadosQuantumConsumido.push_back(quantumTotal - quantumActual[cpu]);
 			return next(cpu);
 			break;
 		case TICK:
@@ -94,13 +95,19 @@ void SchedLottery::sacar(int pid) {
 		if (process[i] == pid) {
 			process.erase(process.begin() + i);
 			processTickets.erase(processTickets.begin() + i);
+			if (process.size() == i) {
+				break;
+			}
+
+			i--;
+
 		}
 	}
 
 	int nuevoTotal = process.size();
 
 	if (nuevoTotal > 0) {
-		tickets = QUANTUM_TOTAL * nuevoTotal * 1000;
+		tickets = quantumTotal * nuevoTotal * 1000;
 		int ticketsProceso = tickets/nuevoTotal;
 
 		for (i = 0; i < nuevoTotal; i++) {
@@ -114,7 +121,7 @@ int SchedLottery::next(int cpu) {
 	
 	if (length > 0) {
 		ticketGanador = rand()%(tickets + 1);
-		quantumActual[cpu] = QUANTUM_TOTAL;
+		quantumActual[cpu] = quantumTotal;
 
 		for (int i = 0; i < length; i++) {
 			suma += processTickets[i];
